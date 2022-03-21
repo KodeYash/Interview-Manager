@@ -137,3 +137,19 @@ def delete_interview(req, id):
         pi = Interview.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/')
+
+
+# Verify Email
+def verify(req, id):
+    if req.method == "POST":
+        pi = Interview.objects.get(pk=id).participated_by()
+        etc = req.POST["emailtocheck"]
+        check = False
+        for p in pi:
+            if(p.email.lower() == etc.lower()):
+                messages.success(req, 'You are eligible for the Interview')
+                check = True
+
+        if check == False:
+            messages.warning(req, "You are not eligible for interview")
+    return render(req, "verify_ip.html")
