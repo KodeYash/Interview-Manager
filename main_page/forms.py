@@ -1,7 +1,3 @@
-from operator import pos
-from tkinter import Widget
-from turtle import position
-from django.core import validators
 from django import forms
 from .models import Interview, Participant
 
